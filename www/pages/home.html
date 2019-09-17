@@ -1,71 +1,70 @@
 <template>
     <div data-name="home" class="page">
 
-        <!-- <div class="navbar">
-          <div class="navbar-inner">
-            <div class="title">Awesome App</div>
-          </div>
-        </div> -->
+    <!-- <div class="navbar">
+      <div class="navbar-inner">
+        <div class="title">Awesome App</div>
+      </div>
+    </div> -->
 
-        <!-- <div class="toolbar">
-          <div class="toolbar-inner">
-            Bottom toolbar
-          </div>
-        </div> -->
+    <!-- <div class="toolbar">
+      <div class="toolbar-inner">
+        Bottom toolbar
+      </div>
+    </div> -->
 
-        <div class="page-content">
-          
-          <!-- title -->
-          <div class="row no-gap">
-            <div class="col-33 tablet-33 title"></div>
-            <div class="col-33 tablet-33 title"><h1>STOCK INFO</h1></div>
-            <div class="col-33 tablet-33 logo"><img class="img-logo" src="img/logo-askutensil.png"></div>
-          </div>
-          
-          <div class="row no-gap">
-            <div class="col-50 tablet-50">Item code:</div>
-            <div class="col-50 tablet-50"></div>
-          </div>
-          
-          <!-- search bar -->
-          <div class="row no-gap">
-            <div class="col-50 tablet-50">
-              <input type="text" class="search" readonly>&nbsp;
-              <button class="button col button-round btn-submit">Submit</button>&nbsp;
-              <button class="button col button-round btn-scan">Scan</button>&nbsp;
-              <button class="button col button-round btn-reset">Reset</button>
-            </div>
-            <div class="col-50 tablet-50">
-            </div>
-          </div>
-          
-          <!-- header -->
-          <div class="row" style="padding: 0 15px 15px 15px; box-shadow: 0px 5px 7px 0px rgba(216,216,216,1);">
-            <div class="col-100 tablet-100 grid">
-              <table class="grid">
-                <tbody>
-                  <tr>
-                    <td>Item Name</td>
-                    <td>Price</td>
-                    <td>Store</td>
-                    <td>Warehouse<br>(Lead time 1-2 days)</td>
-                    <td style="border-right: none;">Picture</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="page-content">
+      
+      <!-- title -->
+      <div class="row no-gap">
+        <div class="col-33 tablet-33 title"></div>
+        <div class="col-33 tablet-33 title"><h1 style="margin-top: 50px">STOCK INFO</h1></div>
+        <div class="col-33 tablet-33 logo"><img class="img-logo" src="img/logo-askutensil.png"></div>
+      </div>
+      
+      <div class="row no-gap">
+        <div class="col-50 tablet-50">Item code:</div>
+        <div class="col-50 tablet-50"></div>
+      </div>
+      
+      <!-- search bar -->
+      <div class="row no-gap">
+        <div class="col-50 tablet-50">
+          <input type="text" class="search">&nbsp;
+          <button class="button col button-round btn-submit">Submit</button>&nbsp;
+          <button class="button col button-round btn-scan">Scan</button>&nbsp;
+          <button class="button col button-round btn-reset">Reset</button>
+        </div>
+        <div class="col-50 tablet-50">
+        </div>
+      </div>
+      
+      <!-- header -->
+      <div class="row" style="padding: 0 15px 15px 15px; box-shadow: 0px 5px 7px 0px rgba(216,216,216,1);">
+        <div class="col-100 tablet-100 grid">
+          <table class="grid">
+            <tbody>
+              <tr>
+                <td>Item Name</td>
+                <td>Price</td>
+                <td>Store</td>
+                <td>Warehouse<br>(Lead time 1-2 days)</td>
+                <td style="border-right: none;">Picture</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-          <!-- data grid -->
-          <div class="row item">
-              <div class="col-100 tablet-100">
-                <div class="list virtual-list virtual-stock">
-                </div>
-              
-              </div>
+      <!-- data grid -->
+      <div class="row item">
+          <div class="col-100 tablet-100">
+            <div class="list virtual-list virtual-stock">
             </div>
+          
           </div>
-
+        </div>
+      </div>
     </div>
 </template>
 <script>
@@ -107,8 +106,8 @@
             '          <td>Rp{{hjual}}</td>' +
             '          <td><span class="item-store">{{store}}</span></td>' +
             '          <td><span class="item-whouse">{{whouse}}</span></td>' +
-            '          <td style="border-right: none; padding: 0 15px; display: flex;"><img class="img-product" src="{{gambar}}" />&nbsp;' +
-            '            <a href="#" @click="removeItem()" class="button col button-round btn-clear">Clear</a></td>' +
+            '          <td style="border-right: none; padding: 0 15px;"><img class="img-product" src="{{gambar}}" />&nbsp;' +
+            '            <!--<a href="#" @click="removeItem({{kdbar}})" class="button col button-round btn-clear">Clear</a>--></td>' +
             '        </tr>' +
             '      </tbody>' +
             '    </table>' +
@@ -131,24 +130,30 @@
           
           var kode = $$('.search').val();
 
+          if (kode == '') {
+            app.dialog.alert('Input kode item!');
+            return;
+          }
+          else
           if (app.methods.itemExists(kode)) {
             app.dialog.alert('Item barang sudah ada!');
+            $$('.search').val('');
             return;
           }
 
           app.preloader.show();
 
-          app.request.getJSON( app.data.endpoint + 'stinfo/'+kode, function(res) {
+          app.request.getJSON( app.data.endpoint + 'stock-info/'+kode, function(res) {
             
             app.preloader.hide();
 
             // app.methods.additem()
-            items.push({ kdbar: res.kdbar,
-                            nama: res.nama,
-                            hjual: res.hjual,
-                            store: res.store,
-                            whouse: res.whouse,
-                            gambar: res.gambar });
+            items.push({ kdbar: res.data.kdbar,
+                            nama: res.data.nama,
+                            hjual: res.data.hjual,
+                            store: res.data.store,
+                            whouse: res.data.whouse,
+                            gambar: res.data.gambar });
 
             // refresh display
             app.router.navigate('/', {
@@ -160,6 +165,14 @@
 
         
         $$('.btn-scan').on('click', function (e) {
+          
+          $$('.search').val(result.text);
+
+          if (app.methods.itemExists(result.text)) {
+            app.dialog.alert('Item barang sudah ada!');
+            $$('.search').val('');
+            return;
+          }
 
           cordova.plugins.barcodeScanner.scan(
             
@@ -173,16 +186,16 @@
 
               app.preloader.show();
 
-              app.request.getJSON( app.data.endpoint + 'stinfo/'+result.text, function(res) {
+              app.request.getJSON( app.data.endpoint + 'stock-info/'+result.text, function(res) {
                 
                 app.preloader.hide();
 
-                items.push({ kdbar: res.kdbar,
-                                nama: res.nama,
-                                hjual: res.hjual,
-                                store: res.store,
-                                whouse: res.whouse,
-                                gambar: res.gambar });
+                items.push({ kdbar: res.data.kdbar,
+                                nama: res.data.nama,
+                                hjual: res.data.hjual,
+                                store: res.data.store,
+                                whouse: res.data.whouse,
+                                gambar: res.data.gambar });
 
                 // refresh display
                 app.router.navigate('/', {
@@ -195,7 +208,7 @@
                 app.dialog.alert("Scanning failed: " + error);
             },
             {
-                preferFrontCamera : false, // iOS and Android
+                preferFrontCamera : true, // iOS and Android
                 showFlipCameraButton : false, // iOS and Android
                 showTorchButton : true, // iOS and Android
                 torchOn: true, // Android, launch with the torch switched on (if available)
