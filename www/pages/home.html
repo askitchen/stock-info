@@ -166,21 +166,17 @@
         
         $$('.btn-scan').on('click', function (e) {
           
-          $$('.search').val(result.text);
-
-          if (app.methods.itemExists(result.text)) {
-            app.dialog.alert('Item barang sudah ada!');
-            $$('.search').val('');
-            return;
-          }
 
           cordova.plugins.barcodeScanner.scan(
             
             function (result) {
               
+              $$('.search').val(result.text);
+
               // result.text - result.format
               if (app.methods.itemExists(result.text)) {
                 app.dialog.alert('Item barang sudah ada!');
+                $$('.search').val('');
                 return;
               }
 
