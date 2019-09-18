@@ -35,20 +35,13 @@ var app = new Framework7({
   root: '#app',
   id:   'com.askitchen.stockinfo',
   name: 'Stock Info',
-  theme: 'md', // Automatic theme detection
-  init: true,
-  initOnDeviceReady: true,
 
-  touch: {
-    disableContextMenu: false,
-  },
-  
   // App root data
   data: function () {
     return {
       // db: null,
-      username: null,
-      password: null,
+      // username: null,
+      // password: null,
 
       endpoint: 'https://askitchen.com/api/v1/',
 
@@ -69,41 +62,6 @@ var app = new Framework7({
         }
       return bFound;
     },
-    addItem: function(kode, qty) {
-      
-      var bFound = false;
-
-      for (var i=0; i < items.length; i++)
-        if (items[i].kdbar === kode) {
-          
-          bFound = true;
-          items[i].qty += parseInt(qty);
-          break;
-        }
-
-      if (!bFound) {
-        items.push({ kdbar: kode, qty: parseInt(qty) })
-      }
-      
-      // hitung total
-      // app.methods.calcTotal();
-    },
-    deleteItem: function(kode) {
-      
-      for (var i =0; i < items.length; i++)
-        if (items[i].kdbar === kode) {
-          items.splice(i,1);
-          break;
-        }
-      // app.methods.calcTotal();
-    },
-  
-  },
-  on: {
-
-    init: function () { // sama dengan onDeviceReady
-    
-    }
   },
   routes: [
     // Add your routes here
@@ -111,36 +69,17 @@ var app = new Framework7({
       path: '/',
       async: function (routeTo, routeFrom, resolve, reject) {
         // Router instance
-        var router = this;
+        // var router = this;
 
         // App instance
-        var app = router.app;
+        // var app = router.app;
 
-        // Show Preloader
-        // app.preloader.show();
-
-        // app.request.getJSON( app.data.endpoint + 'dashboard', function(res) {
-
-          // Hide Preloader
-          // app.preloader.hide();
-
-          // console.log(res)
-          // var data = JSON.parse(res)
-          
-          // Resolve route to load page
-          resolve(
-            {
-              componentUrl: './pages/home.html',
-            },
-            // {
-            //   context: {
-            //     banner: res.banner,
-            //     data: res.categories,
-            //   }
-            // }
-          );
-
-        // });
+        // Resolve route to load page
+        resolve(
+          {
+            componentUrl: './pages/home.html',
+          }
+        );
       },
     }
   ],
@@ -148,15 +87,4 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main', {
   url: '/'
-});
-
-
-$$(document).on('backbutton', function (e) {
-  e.preventDefault();
-  // for example, based on what and where view you have
-  if (app.views.main.router.url == '/') {
-    navigator.app.exitApp();
-  } else {
-    mainView.router.back();
-  }
 });
