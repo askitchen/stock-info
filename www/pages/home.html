@@ -71,12 +71,12 @@
   return {
         
     // Page Events
-    methods: {
+    // methods: {
     
-      removeItem: function() {
-        app.dialog.alert('Haloo');
-      }
-    },
+    //   removeItem: function() {
+    //     app.dialog.alert('Haloo');
+    //   }
+    // },
 
     on: {
       
@@ -229,28 +229,6 @@
             ignoreCache: true,
           });
         });
-
-        // $$('.searchTerm').on('focus', function (e) {
-          
-        //   e.preventDefault();
-          
-        //   app.router.navigate('/search/', {
-        //     reloadCurrent: true,
-        //     ignoreCache: true,
-        //   });
-
-        // });
-
-        // app.request.get( app.data.endpoint + 'cart/total_items', function(res) {
-                  
-        //   var data = JSON.parse(res);
-          
-        //   if (data.status)
-        //   {
-        //     app.data.total_items = data.totqty;
-        //     $$('.badge').text(app.data.total_items);
-        //   }
-        // });
 
       }
     }
