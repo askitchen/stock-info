@@ -81,7 +81,11 @@ var app = new Framework7({
           }
         );
       },
-    }
+    },
+    {
+      path: '/search/',
+      componentUrl: './pages/search.html',
+    },
   ],
 });
 
