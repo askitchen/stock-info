@@ -75,6 +75,9 @@ a.search {
     font-size: 14px;
     color: #fff;
 } */
+button.button.col.button-round.btn-dummy {
+    visibility: hidden;
+}
 button.button.col.button-round.btn-search,
 button.button.col.button-round.btn-scan,
 button.button.col.button-round.btn-reset {
