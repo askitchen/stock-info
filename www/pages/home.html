@@ -22,17 +22,17 @@
         <div class="col-33 tablet-33 logo"><img class="img-logo" src="img/logo-askutensil.png"></div>
       </div>
       
-      <div class="row no-gap">
+      <!-- <div class="row no-gap">
         <div class="col-50 tablet-50">Item code:</div>
         <div class="col-50 tablet-50"></div>
-      </div>
+      </div> -->
       
       <!-- search bar -->
       <div class="row no-gap">
         <div class="col-50 tablet-50">
-          <!-- <input type="text" class="search">&nbsp;
-          <button class="button col button-round btn-submit">Submit</button>&nbsp; -->
-          <a href="/search/" class="search"></a>&nbsp;
+          <!-- <input type="text" class="search">&nbsp; -->
+          <button class="button col button-round btn-search">Search</button>&nbsp;
+          <!-- <a href="/search/" class="search"></a>&nbsp; -->
           <button class="button col button-round btn-scan">Scan</button>&nbsp;
           <button class="button col button-round btn-reset">Reset</button>
         </div>
@@ -167,6 +167,14 @@
         });
 
         
+        $$('.btn-search').on('click', function (e) {
+
+          app.router.navigate('/search/', {
+            reloadCurrent: true,
+            ignoreCache: true,
+          });
+        });
+
         $$('.btn-scan').on('click', function (e) {
           
 

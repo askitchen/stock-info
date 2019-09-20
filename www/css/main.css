@@ -69,12 +69,13 @@ a.search {
     border-radius: 10px;
     padding: 5px;
 }
-button.button.col.button-round.btn-submit {
+/* button.button.col.button-round.btn-submit {
     background: #ff0000;
     width: 100px !important;
     font-size: 14px;
     color: #fff;
-}
+} */
+button.button.col.button-round.btn-search,
 button.button.col.button-round.btn-scan,
 button.button.col.button-round.btn-reset {
     background: #03274e;
