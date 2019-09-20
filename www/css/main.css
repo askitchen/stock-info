@@ -39,7 +39,11 @@ img.img-logo {
 .md .list {
     margin: 0;
 }
-span.item-store, span.item-whouse {
+.md .list ul:before, .md .list ul:after {
+    background-color: transparent;
+}
+
+span.item-price, span.item-store, span.item-whouse {
     font-size: 24px;
     font-weight: bold;
 }

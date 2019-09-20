@@ -36,6 +36,13 @@
 </template>
 <script>
   return {
+    methods: {
+    
+      sayHello: function() {
+        app.dialog.alert('Hello');
+      }
+    },
+      
     // Page Events
     on: {
       
@@ -63,14 +70,15 @@
                   // List item Template7 template
                   itemTemplate:
                     '<li>' +
-                      '<a href="/detail/{{kdurl}}" class="item-link item-content">' +
+                      '<a href="#" class="item-link item-content">' +
+                        '<input type="hidden" class="kode" value="{{kdbar}}" />' +
                         '<div class="item-media"><img src="https://askitchen.com/upload/gambar/{{gambar}}" width="70" /></div>' +
                         '<div class="item-inner">' +
                           '<div class="item-title-row">' +
                             '<div class="item-title"><b>{{nama}}</b></div>' +
                           '</div>' +
                           '<div class="item-text product-price">Rp{{hjual}}</div>' +
-                          '{{#if pnj}}<div class="item-text product-size">{{pnj}} x {{lbr}}{{#if tgi}} x {{tgi}}{{/if}}</div>{{/if}}' +
+                          // '{{#if pnj}}<div class="item-text product-size">{{pnj}} x {{lbr}}{{#if tgi}} x {{tgi}}{{/if}}</div>{{/if}}' +
                           '<div class="item-text">{{kdbar}}</div>' +
                         '</div>' +
                       '</a>' +
@@ -96,8 +104,13 @@
           }
         });
         
-        app.preloader.hide();
-     
+                
+        $$('.list.media-list.virtual-list.virtual-stock').on('click', '.item-link.item-content', function (e) {
+          var kode = $$(this).find('.kode').val();
+          // console.log('kode: '+kode)
+          app.methods.itemAdd(kode);
+        });
+
       }
     }
   }

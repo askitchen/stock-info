@@ -104,7 +104,7 @@
             '      <tbody>' +
             '        <tr>' +
             '          <td>{{nama}}</td>' +
-            '          <td>Rp{{hjual}}</td>' +
+            '          <td><span class="item-price">Rp{{hjual}}</span></td>' +
             '          <td><span class="item-store">{{store}}</span></td>' +
             '          <td><span class="item-whouse">{{whouse}}</span></td>' +
             '          <td style="border-right: none; padding: 0 15px;"><img class="img-product" src="{{gambar}}" />&nbsp;' +
@@ -137,7 +137,7 @@
           else
           if (app.methods.itemExists(kode)) {
             app.dialog.alert('Item barang sudah ada!');
-            $$('.search').val('');
+            // $$('.search').val('');
             return;
           }
 

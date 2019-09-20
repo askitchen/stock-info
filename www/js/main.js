@@ -2,6 +2,7 @@
 var $$ = Dom7;
 
 var items   = [];
+// sample data
 // [
 //   {
 //     'kdbar': '01330003',
@@ -29,12 +30,13 @@ var items   = [];
 //   },
 // ];
 
-var bBackPressed = false;
+// var bBackPressed = false;
 
 var app = new Framework7({
   root: '#app',
   id:   'com.askitchen.stockinfo',
   name: 'Stock Info',
+  theme: 'md',
 
   // App root data
   data: function () {
@@ -50,6 +52,39 @@ var app = new Framework7({
   // App root methods
   methods: {
     
+    itemAdd: function(kode) {
+      
+      if (app.methods.itemExists(kode)) {
+        app.dialog.alert('Item barang sudah ada!');
+        // $$('.search').val('');
+        return;
+      }
+
+      app.preloader.show();
+
+      app.request.getJSON( app.data.endpoint + 'stock-info/'+kode, function(res) {
+        
+        app.preloader.hide();
+        
+        if (res.data.status) {
+                
+          items.push({ kdbar: res.data.kdbar,
+                          nama: res.data.nama,
+                          hjual: res.data.hjual,
+                          store: res.data.store,
+                          whouse: res.data.whouse,
+                          gambar: res.data.gambar });
+
+          // refresh display
+          app.router.navigate('/', {
+            reloadCurrent: true,
+            ignoreCache: true,
+          });
+        } else
+          app.dialog.alert('Item tidak ditemukan!');
+      });
+
+    },
     itemExists: function(kode) {
       
       var bFound = false;
