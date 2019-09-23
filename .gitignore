@@ -1,4 +1,6 @@
 backup/
+pages/backup/
+pages/backup2/
 server.js
 
 # Logs
