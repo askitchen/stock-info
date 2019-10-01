@@ -37,6 +37,9 @@ var app = new Framework7({
   id:   'com.askitchen.stockinfo',
   name: 'Stock Info',
   theme: 'md',
+  
+  init: true, // for calling keepAwake()
+  initOnDeviceReady: true,
 
   // App root data
   data: function () {
@@ -98,6 +101,13 @@ var app = new Framework7({
       return bFound;
     },
   },
+  on: {
+
+    init: function () { // sama dengan onDeviceReady
+      
+      window.plugins.insomnia.keepAwake();
+    }
+  },      
   routes: [
     // Add your routes here
     {
@@ -127,3 +137,28 @@ var app = new Framework7({
 var mainView = app.views.create('.view-main', {
   url: '/'
 });
+
+$$(document).on('backbutton', function (e) {
+
+  e.preventDefault();
+  
+  var dialog = app.dialog.prompt('Input password..', function (pwd) {
+    
+    if (pwd == '123') {
+  
+      window.plugins.insomnia.allowSleepAgain();
+      navigator.app.exitApp();
+    }
+  });
+  // dialog.$el.find('input').focus();
+});
+
+$$(document).on('pause', function (e) {
+
+  e.preventDefault();
+  // timeout = setTimeout(onIdle, 10000);
+});
+
+// function onIdle() {
+
+// }
