@@ -105,7 +105,7 @@ var app = new Framework7({
 
     init: function () { // sama dengan onDeviceReady
       
-      /* 
+      //*
       window.plugins.insomnia.keepAwake();
       //*/
     }
@@ -152,15 +152,5 @@ $$(document).on('backbutton', function (e) {
       navigator.app.exitApp();
     }
   });
-  // dialog.$el.find('input').focus();
+  dialog.$el.find('input').focus();
 });
-
-$$(document).on('pause', function (e) {
-
-  e.preventDefault();
-  // timeout = setTimeout(onIdle, 10000);
-});
-
-// function onIdle() {
-
-// }

@@ -34,7 +34,7 @@ h1 {
 img.img-logo {
     width: 140px;
     display: block;
-    margin: 0 auto; /*60px*/
+    margin: 5px auto 0 auto; /*60px*/
 }
 
 .md .list {
@@ -61,7 +61,7 @@ img.img-product {
 }
 
 input.search {
-    width: 50%;
+    width: 45%;
     height: 45px;
     color: #000;
     font-size: 32px;
