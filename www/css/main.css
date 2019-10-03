@@ -15,12 +15,17 @@ h1 {
     padding: 0 15px;
     /* height: 100%; */
 }
-.col-33.tablet-33 {
+/* .col-33.tablet-33 {
     height: 1px;
 }
 .col-33.tablet-33.title {
     text-align: center;
+} */
+
+.row.no-gap.header {
+    margin-top: 35px;
 }
+
 .col-70.tablet-70 {
     padding: 0 15px;
     font-size: 24px;
