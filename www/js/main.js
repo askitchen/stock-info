@@ -105,7 +105,9 @@ var app = new Framework7({
 
     init: function () { // sama dengan onDeviceReady
       
+      /* 
       window.plugins.insomnia.keepAwake();
+      //*/
     }
   },      
   routes: [
